@@ -19,4 +19,4 @@ Use the readme.txt file for each scripts sample usage and output\
 The script will look for the required selenium browser drivers in its local path and in the system path.  If it finds the FireFox, Edge (chromium) or Chrome drivers in these paths it will run the first one it finds automatically\
 [Geckodriver](https://github.com/mozilla/geckodriver/releases)\
 [EdgeChromium](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)\
-[Chrome](https://chromedriver.chromium.org/) <-- This should work for Chromium (non-Edge)
+[Chrome](https://chromedriver.chromium.org/) <-- This should work for Chromium (non-Edge) as well
