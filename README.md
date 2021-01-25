@@ -6,7 +6,7 @@ Minimum Python 3.6 for printf printing
 +	To install pip on a Mac or Unix client:
 +		curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 +		python3 get-pip.py
-+     Mac also can use sudo easy_install pip
++     Mac also can use __sudo easy_install pip__
 +	Selenium for browser automation as AIQ does not offer CLI based login.
 +		python3 pip install -U selenium
 +	PrettyTable is also in use for some scripts.
