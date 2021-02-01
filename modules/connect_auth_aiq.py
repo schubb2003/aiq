@@ -12,6 +12,7 @@ import requests
 from selenium import webdriver
 
 AIQ_URL = "https://activeiq.solidfire.com/json-rpc/2.0"
+BASE_AIQ = "https://activeiq.solidfire.com/#/dashboard""
 
 def web_login(user, user_pass):
     """
@@ -20,15 +21,15 @@ def web_login(user, user_pass):
     """
     try:
         driver = webdriver.Firefox()
-        driver.get("https://activeiq.solidfire.com/#/dashboard")
+        driver.get(BASE_AIQ)
     except Exception as ff_except:
         try:
             driver = webdriver.Edge()
-            driver.get("https://activeiq.solidfire.com/#/dashboard")
+            driver.get(BASE_AIQ)
         except Exception as edge_except:
             try:
                 driver = webdriver.Chrome()
-                driver.get("https://activeiq.solidfire.com/#/dashboard")
+                driver.get(BASE_AIQ)
             except Exception as chrome_except:
                 print(f"No suitable drivers found, script will exit."
                       f"\n\n{ff_except}\n\n{edge_except}\n\n{chrome_except}")
