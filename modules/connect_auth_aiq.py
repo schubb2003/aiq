@@ -14,6 +14,10 @@ from selenium import webdriver
 AIQ_URL = "https://activeiq.solidfire.com/json-rpc/2.0"
 
 def web_login(user, user_pass):
+    """
+    Open browser via selenium, walks through Firefox, then Edge (chromium),
+    then Chrome
+    """
     try:
         driver = webdriver.Firefox()
         driver.get("https://activeiq.solidfire.com/#/dashboard")
@@ -51,6 +55,9 @@ def web_login(user, user_pass):
 
 
 def build_headers(auth_cookie):
+    """
+    Build the headers for authorization
+    """
     headers = {
         'Content-Type': "application/json",
         'Cache-Control': "no-cache",
