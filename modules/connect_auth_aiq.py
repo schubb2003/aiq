@@ -63,11 +63,13 @@ def build_connect(headers, payload):
     """
     Connect to AIQ
     """
-    #print("URL is:\t{}\nHeaders are:\t{}\nPayload is:\t{}".format(url, headers, payload))
-    response = requests.post(url=AIQ_URL, headers=headers, json=payload)
-    response_json = response.json()
-    return response_json
-
+    try:
+        response = requests.post(url=AIQ_URL, headers=headers, json=payload)
+        response_json = response.json()
+        return response_json
+    except MemoryError:
+        print(f"Data size returned is too large, please select an "
+              f"individual cluster to search on.")
 
 def main():
     """
