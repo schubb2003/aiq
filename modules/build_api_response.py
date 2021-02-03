@@ -35,11 +35,16 @@ def get_cluster_info(headers, cls_id):
     str_cls_id = str(cls_id)
     url = "https://activeiq.solidfire.com/state/cluster/" + str_cls_id + "/GetClusterInfo"
     response_cluster = requests.get(url=url, headers=headers)
-    cluster_json = response_cluster.json()
-    cluster_svip = cluster_json['clusterInfo']['svip']
-    cluster_mvip = cluster_json['clusterInfo']['mvip']
+    if response_cluster.status_code == 200:
+        cluster_json = response_cluster.json()
+        cluster_svip = cluster_json['clusterInfo']['svip']
+        cluster_mvip = cluster_json['clusterInfo']['mvip']
+    elif response_cluster.status_code == 404:
+        print(f"Unable to pull from {cls_id},\n{response_cluster.text}")
+        cluster_svip = "No data found"
+        cluster_mvip = "No data found"
     return cluster_svip, cluster_mvip
-
+        
 def main():
     """
     Nothing here as this is a module
