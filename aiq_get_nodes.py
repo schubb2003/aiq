@@ -31,12 +31,7 @@ def get_nodes(headers, **cluster_dict):
             elem_vers = node['softwareVersion']
             node_serial = node['serialNumber']
             node_stag = node['serviceTag']            
-            if node['chassisType'] == "R630":
-                node_type = "SF19210"
-            elif node['chassisType'] == "QS52B":
-                node_type = "H610S"
-            else:
-                node_type = "Unknown"
+            node_type = node['nodeType']
             node_mip = node['mip']
             node_sip = node['sip']
             node_details = [cls_name, node_type, node_id, elem_vers,
