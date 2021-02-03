@@ -20,7 +20,7 @@ def build_response(headers, cluster_dict, search_string, api_call, node_id):
         response = requests.get(url=url, headers=headers)
         res_code = (response.status_code)
         if res_code == 404:
-            pass
+            print(f"{cls_id} not found")
         else:
             response_json = response.json()
             url = "https://activeiq.solidfire.com/state/cluster/" + str_cls_id + "/GetClusterInfo"
