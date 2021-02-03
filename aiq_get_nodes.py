@@ -30,7 +30,7 @@ def get_nodes(headers, **cluster_dict):
             node_name = node['name']
             elem_vers = node['softwareVersion']
             node_serial = node['serialNumber']
-            node_stag = node['serviceTag']            
+            node_stag = node['serviceTag']
             node_type = node['nodeType']
             node_mip = node['mip']
             node_sip = node['sip']
