@@ -12,7 +12,7 @@ import requests
 from selenium import webdriver
 
 AIQ_URL = "https://activeiq.solidfire.com/json-rpc/2.0"
-BASE_AIQ = "https://activeiq.solidfire.com/#/dashboard""
+BASE_AIQ = "https://activeiq.solidfire.com/#/dashboard"
 
 def web_login(user, user_pass):
     """
