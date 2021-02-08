@@ -113,7 +113,7 @@ def get_inputs_inventory():
     return user, user_pass, search_vers, search_model, blank_serial, search_customer
 
 
-def get_inputs_logs():
+def get_inputs_disks():
     """
     Get the inputs for connecting to the cluster
     """
@@ -131,17 +131,6 @@ def get_inputs_logs():
                         metavar='customer name',
                         dest='search_customer',
                         help='customer name to search on')
-    parser.add_argument('--search-string', type=str.lower,
-                        required=False,
-                        metavar='text to search for',
-                        dest='search_string',
-                        help='log text to search for')
-    parser.add_argument('--sort-order',
-                        choices=["Cluster", "Date", "Severity", "Details", "Type"],
-                        required=False,
-                        metavar='sort_order',
-                        dest='sort_order',
-                        help='column to sort on for certain script outputs')
     parser.add_argument('--search-cluster', type=str.lower,
                         required=False,
                         metavar='search_cluster',
@@ -157,11 +146,9 @@ def get_inputs_logs():
     else:
         user_pass = args.p
     search_customer = args.search_customer
-    search_string = args.search_string
-    sort_order = args.sort_order
     search_cluster = args.search_cluster
 
-    return user, user_pass, search_customer, search_string, sort_order, search_cluster
+    return user, user_pass, search_customer, search_cluster
 
 
 def main():
