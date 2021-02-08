@@ -58,15 +58,15 @@ def build_drives(response_json, cluster_name, filename):
     #return drive_dict_pre
 
 
-def get_filename(cluster_name=None):
+def get_filename(search_cluster=None):
     """
     Build the output filename
     """
-    if cluster_name is None:
-        cluster_name = "all_"
+    if search_cluster is None:
+        search_cluster = "all_"
     now_date = datetime.now()
     out_date = now_date.strftime("%Y-%m-%d_%H-%M")
-    outfile_name = "drive_info_" +cluster_name + out_date + '.txt'
+    outfile_name = "drive_info_" + search_cluster + out_date + '.txt'
     if os.path.exists(outfile_name):
         os.remove(outfile_name)
     print('Output file name is: {}'.format(outfile_name))
@@ -105,7 +105,7 @@ def main():
     response_json = build_connect(headers,payload)
     cluster_dict = parse_customer(response_json, search_customer)
     cluster_dict_out = parse_cluster(cluster_dict, search_cluster)
-    filename = get_filename()
+    filename = get_filename(search_cluster)
     build_response(headers, cluster_dict_out, filename)
 
 
