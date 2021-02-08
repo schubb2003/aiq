@@ -113,6 +113,57 @@ def get_inputs_inventory():
     return user, user_pass, search_vers, search_model, blank_serial, search_customer
 
 
+def get_inputs_logs():
+    """
+    Get the inputs for connecting to the cluster
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-u', type=str,
+                        required=True,
+                        metavar='user',
+                        help='AIQ username')
+    parser.add_argument('-p', type=str,
+                        required=False,
+                        metavar='user_pass',
+                        help='AIQ password')
+    parser.add_argument('--search-customer', type=str.lower,
+                        required=False,
+                        metavar='customer name',
+                        dest='search_customer',
+                        help='customer name to search on')
+    parser.add_argument('--search-string', type=str.lower,
+                        required=False,
+                        metavar='text to search for',
+                        dest='search_string',
+                        help='log text to search for')
+    parser.add_argument('--sort-order',
+                        choices=["Cluster", "Date", "Severity", "Details", "Type"],
+                        required=False,
+                        metavar='sort_order',
+                        dest='sort_order',
+                        help='column to sort on for certain script outputs')
+    parser.add_argument('--search-cluster', type=str.lower,
+                        required=False,
+                        metavar='search_cluster',
+                        dest='search_cluster',
+                        help='search for a particular cluster in an output')
+    parser.set_defaults(blank_serial=False)
+
+    args = parser.parse_args()
+    
+    user = args.u
+    if not args.p:
+        user_pass = getpass("Enter password for user {}: ".format(user))
+    else:
+        user_pass = args.p
+    search_customer = args.search_customer
+    search_string = args.search_string
+    sort_order = args.sort_order
+    search_cluster = args.search_cluster
+
+    return user, user_pass, search_customer, search_string, sort_order, search_cluster
+
+
 def get_inputs_disks():
     """
     Get the inputs for connecting to the cluster
