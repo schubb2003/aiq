@@ -58,13 +58,15 @@ def build_drives(response_json, cluster_name, filename):
     #return drive_dict_pre
 
 
-def get_filename():
+def get_filename(cluster_name=None):
     """
     Build the output filename
     """
+    if cluster_name is None:
+        cluster_name = "all_"
     now_date = datetime.now()
     out_date = now_date.strftime("%Y-%m-%d_%H-%M")
-    outfile_name = "drive_info_" + out_date + '.txt'
+    outfile_name = "drive_info_" +cluster_name + out_date + '.txt'
     if os.path.exists(outfile_name):
         os.remove(outfile_name)
     print('Output file name is: {}'.format(outfile_name))
