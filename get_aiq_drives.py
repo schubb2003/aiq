@@ -66,7 +66,7 @@ def get_filename(search_cluster=None):
         search_cluster = "all_"
     now_date = datetime.now()
     out_date = now_date.strftime("%Y-%m-%d_%H-%M")
-    outfile_name = "drive_info_" + search_cluster + out_date + '.txt'
+    outfile_name = "drive_info_" + search_cluster + "_" + out_date + '.txt'
     if os.path.exists(outfile_name):
         os.remove(outfile_name)
     print('Output file name is: {}'.format(outfile_name))
