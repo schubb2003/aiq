@@ -124,12 +124,12 @@ def main():
     """
     Do the work
     """
-    user, user_pass, search_vers, search_model, blank_serial, search_company = get_inputs()
+    user, user_pass, search_vers, search_model, blank_serial, search_customer = get_inputs()
     payload = list_cluster_details_payload()
     auth_cookie = web_login(user, user_pass)
     headers = build_headers(auth_cookie)
     response_json = build_connect(headers, payload)
-    cluster_dict = parse_customer(response_json, search_company)
+    cluster_dict = parse_customer(response_json, search_customer)
     node_dict = get_nodes(headers, **cluster_dict)
     node_parsed_dict = parse_node_info(blank_serial, search_vers,
                                        search_model, **node_dict)

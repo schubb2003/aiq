@@ -116,12 +116,12 @@ def main():
     """
     Do the work
     """
-    user, user_pass, search_company, search_string, sort_order, search_cluster  = get_inputs()
+    user, user_pass, search_customer, search_string, sort_order, search_cluster  = get_inputs()
     auth_cookie = web_login(user, user_pass)
     payload = build_payload()
     headers = build_headers(auth_cookie)
     response_json = build_connect(headers, payload)
-    cluster_dict = parse_customer(response_json, search_company)
+    cluster_dict = parse_customer(response_json, search_customer)
     evt_dict_pre = build_events(headers, search_string, **cluster_dict)
     evt_dict = parse_cluster(evt_dict_pre, search_cluster)
     outfile_name = get_filename()
