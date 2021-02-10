@@ -29,6 +29,15 @@ def get_cluster_info_payload(cls_id):
                 "id": 1})
     return payload
 
+
+def suppress_cluster_payload(sup_type, cls_id, dur_sec):
+    payload = ({"method": "SuppressNotifications",
+                "params": {"type": sup_type,
+                            "clusterID": cls_id,
+                            "duration_sec": dur_sec}
+                            })
+    return payload
+
 def main():
     """
     Nothing here as this is a module

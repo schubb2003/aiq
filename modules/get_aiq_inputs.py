@@ -202,6 +202,58 @@ def get_inputs_disks():
     return user, user_pass, search_customer, search_cluster
 
 
+def get_inputs_suppress():
+    """
+    Get the inputs for connecting to the cluster
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-u', type=str,
+                        required=True,
+                        metavar='user',
+                        help='AIQ username')
+    parser.add_argument('-p', type=str,
+                        required=False,
+                        metavar='user_pass',
+                        help='AIQ password')
+    parser.add_argument('--search-customer', type=str.lower,
+                        required=False,
+                        metavar='customer name',
+                        dest='search_customer',
+                        help='customer name to search on')
+    parser.add_argument('--search-cluster', type=str.lower,
+                        required=False,
+                        metavar='search_cluster',
+                        dest='search_cluster',
+                        help='search for a particular cluster in an output')
+    parser.add_argument('--duration', type=int,
+                        metavar='dur_sec',
+                        required=True,
+                        help='Duration time in seconds, default 14400 (4hrs)')
+    parser.add_argument('--suppress-type',
+                        choices=['upgrade', 'full'],
+                        default="full",
+                        required=False,
+                        metavar='suppress_type',
+                        dest='suppress_type',
+                        help=('Is this suppression full or for an upgrade, '
+                             'default is full'))
+    parser.set_defaults(blank_serial=False)
+
+    args = parser.parse_args()
+    
+    user = args.u
+    if not args.p:
+        user_pass = getpass("Enter password for user {}: ".format(user))
+    else:
+        user_pass = args.p
+    search_customer = args.search_customer
+    search_cluster = args.search_cluster
+    dur_sec = args.duration
+    sup_type = args.suppress_type
+
+    return user, user_pass, search_customer, search_cluster, dur_sec, sup_type
+
+
 def main():
     """
     Nothing here as this is a module
