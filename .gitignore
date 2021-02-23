@@ -1,4 +1,4 @@
 modules/__pycache__/
-output_files/*.txt
-geckodriver.exe
 geckodriver.log
+geckodriver.exe
+output_files/*.txt
