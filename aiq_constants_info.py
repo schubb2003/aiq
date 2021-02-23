@@ -58,6 +58,8 @@ def build_output(outfile_name, **constant_dict):
     out_table = PrettyTable()
     out_table.field_names = ["Cluster","Constant Name", "Constant Setting"]
     #out_table.max_width['Constant Setting'] = 60
+    out_table.align["Constant Name"] = "l"
+    out_table.align["Constant Setting"] = "l"
     for key,val in constant_dict.items():
         cls_name = key.split("-")[0]
         cnst_name = key.split("-")[1]

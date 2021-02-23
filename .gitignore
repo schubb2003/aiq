@@ -1,3 +1,5 @@
 modules/__pycache__/
 geckodriver.log
 geckodriver.exe
+output_files/cluster_constants*.txt
+output_files/repl_info*.txt
