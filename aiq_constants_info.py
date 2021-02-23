@@ -47,7 +47,7 @@ def build_events(response_dict, search_string):
         elif search_string is None:
             for dict_key in response_json.keys():
                     constant_out = response_json[dict_key]
-                    cls_key = cluster_name + "_" + dict_key
+                    cls_key = cluster_name + "-" + dict_key
                     constant_dict_pre[cls_key] = constant_out
         else:
             sys.exit(1)
@@ -59,8 +59,8 @@ def build_output(outfile_name, **constant_dict):
     out_table.field_names = ["Cluster","Constant Name", "Constant Setting"]
     #out_table.max_width['Constant Setting'] = 60
     for key,val in constant_dict.items():
-        cls_name = key.split("_")[0]
-        cnst_name = key.split("_")[1]
+        cls_name = key.split("-")[0]
+        cnst_name = key.split("-")[1]
         cnst_out = val
         out_table.add_row([cls_name, cnst_name, cnst_out])
     out_table_text = out_table.get_string()
