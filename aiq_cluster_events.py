@@ -26,9 +26,7 @@ def build_cluster_events(cls_id):
     event_payload = ({"method": "ListEvents", 
                       "params": {
                         "clusterID": cls_id
-                        }, 
-                      "id": 1
-                    })
+                        }, "id": 1 })
     return event_payload
 
 
