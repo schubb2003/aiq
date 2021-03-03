@@ -26,9 +26,7 @@ def build_cluster_events(cls_id):
     fault_payload = ({"method": "ListClusterFaults", 
                       "params": {
                         "clusterID": cls_id
-                        }, 
-                      "id": 1
-                    })
+                        }, "id": 1 })
     return fault_payload
 
 
