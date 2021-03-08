@@ -43,6 +43,10 @@ def get_nodes(headers, **cluster_dict):
 
 def parse_node_info(blank_serial, search_vers=None,
                     search_model=None, **node_dict):
+    if "-" in search_model:
+        search_model_series = search_model.split("-")[0]
+        search_model_size = str(search_model.split("-")[1])
+        search_model = search_model_series + str(search_model_size)
     node_parsed_dict = {}
     for node_name, node_details in node_dict.items():
         node_type = node_details[1]
@@ -50,6 +54,10 @@ def parse_node_info(blank_serial, search_vers=None,
         serial_num = node_details[4]
         str_evers = str(elem_vers)
         str_svers = str(search_vers)
+        if "-" in node_type:
+            node_type2 = node_type.split("-")[0] + str(node_type.split("-")[1])
+        else:
+            node_type2 = node_type
         if blank_serial == True:
             if serial_num is None:
                 node_parsed_dict[node_name] = node_details
@@ -57,9 +65,11 @@ def parse_node_info(blank_serial, search_vers=None,
             if search_vers is not None and str(search_vers) in str(elem_vers):
                 if search_model is None:
                     node_parsed_dict[node_name] = node_details
-                elif search_model is not None and search_model == node_type:
+                elif search_model is not None and (search_model == node_type or
+                                                   search_model == node_type2):
                     node_parsed_dict[node_name] = node_details
-            elif search_model and search_model == node_type:
+            elif search_model and (search_model == node_type or
+                                   search_model == node_type2):
                 if search_vers is None:
                     node_parsed_dict[node_name] = node_details
                 elif search_vers is not None:
