@@ -57,6 +57,7 @@ def get_filename(cluster_name):
 
 
 def parse_response(fs_dict):
+    gb_div = 1024**3
     for fs_key, fs_val in fs_dict.items():
         print(36*"#")
         print(f"Cluster:\t{fs_key}")
@@ -71,10 +72,10 @@ def parse_response(fs_dict):
             node_id = nodes['nodeID']
             for mount_entry in nodes['result']['mountEntries']:
                 if mount_entry['directory'] == '/var/log':
-                    fs_size = round((mount_entry['capacity']/1073741824), 2)
-                    fs_avail = round((mount_entry['available']/1073741824), 2)
-                    fs_free = round((mount_entry['free']/1073741824), 2)
-                    pct_free = round((fs_free/fs_size*100), 2)
+                    fs_size = round((mount_entry['capacity']/gb_div), 2)
+                    fs_avail = round((mount_entry['available']/gb_div), 2)
+                    fs_free = round((mount_entry['free']/gb_div), 2)
+                    pct_free = round((fs_avail/fs_size*100), 2)
                     print(f"{node_id:>11}{fs_size:>10}G{fs_avail:>10}G"
                           f"{fs_free:>10}G{pct_free:>13}%\n")
 
