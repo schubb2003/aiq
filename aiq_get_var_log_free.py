@@ -24,34 +24,34 @@ def build_payload():
     return payload
 
 
-def build_events(response_dict, search_string):
-    """
-    Build the events list
-    """
-    constant_list = []
-    constant_dict_pre = {}
-    for key,val in response_dict.items():
-        cluster_name = key
-        response_json = val
-        if search_string is not None:
-            for cls_constant in search_string.split(","):
-                for dict_key in response_json.keys():
-                    if cls_constant in dict_key.lower():
-                        constant_list.append(dict_key)
-                        constant_out = response_json[dict_key]
-                        cls_key = cluster_name + "_" + dict_key
-                        constant_dict_pre[cls_key] = constant_out
-            if len(constant_list) == 0:
-                print(f"\t{cls_constant} not found")
-                sys.exit(1)
-        elif search_string is None:
-            for dict_key in response_json.keys():
-                    constant_out = response_json[dict_key]
-                    cls_key = cluster_name + "-" + dict_key
-                    constant_dict_pre[cls_key] = constant_out
-        else:
-            sys.exit(1)
-    return constant_dict_pre
+#def build_events(response_dict, search_string):
+#    """
+#    Build the events list
+#    """
+#    constant_list = []
+#    constant_dict_pre = {}
+#    for key,val in response_dict.items():
+#        cluster_name = key
+#        response_json = val
+#        if search_string is not None:
+#            for cls_constant in search_string.split(","):
+#                for dict_key in response_json.keys():
+#                    if cls_constant in dict_key.lower():
+#                        constant_list.append(dict_key)
+#                        constant_out = response_json[dict_key]
+#                        cls_key = cluster_name + "_" + dict_key
+#                        constant_dict_pre[cls_key] = constant_out
+#            if len(constant_list) == 0:
+#                print(f"\t{cls_constant} not found")
+#                sys.exit(1)
+#        elif search_string is None:
+#            for dict_key in response_json.keys():
+#                    constant_out = response_json[dict_key]
+#                    cls_key = cluster_name + "-" + dict_key
+#                    constant_dict_pre[cls_key] = constant_out
+#        else:
+#            sys.exit(1)
+#    return constant_dict_pre
 
 
 def build_output(outfile_name, **constant_dict):
@@ -84,8 +84,8 @@ def get_filename(cluster_name):
     return outfile_name
 
 
-def parse_response(response_dict):
-    for fs_key, fs_val in response_dict.items():
+def parse_response(fs_dict):
+    for fs_key, fs_val in fs_dict.items():
         print(36*"#")
         print(f"Cluster:\t{fs_key}")
         print(36*"#")
@@ -116,13 +116,10 @@ def main():
     payload = build_payload()
     headers = build_headers(auth_cookie)
     response_json = build_connect(headers,payload)
-    cluster_dict = parse_customer(response_json, search_customer)
-    response_dict = build_response(headers, cluster_dict, search_string, api_call='ListMountedFileSystems', node_id=None)
-    #print(response_dict)
-    parse_response(response_dict)
-    #outfile_name = get_filename(search_customer)
-    #constant_dict_pre = build_events(response_dict, search_string)
-    #constant_dict = parse_cluster(constant_dict_pre, search_cluster)
+    customer_dict = parse_customer(response_json, search_customer)
+    cluster_dict = parse_cluster(customer_dict, search_cluster)
+    fs_dict = build_response(headers, cluster_dict, search_string, api_call='ListMountedFileSystems', node_id=None)
+    parse_response(fs_dict)
     #build_output(outfile_name, **constant_dict)
 
 if __name__ == "__main__":
