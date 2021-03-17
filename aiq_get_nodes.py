@@ -43,10 +43,11 @@ def get_nodes(headers, **cluster_dict):
 
 def parse_node_info(blank_serial, search_vers=None,
                     search_model=None, **node_dict):
-    if "-" in search_model:
-        search_model_series = search_model.split("-")[0]
-        search_model_size = str(search_model.split("-")[1])
-        search_model = search_model_series + str(search_model_size)
+    if search_model is not None:
+        if "-" in search_model:
+            search_model_series = search_model.split("-")[0]
+            search_model_size = str(search_model.split("-")[1])
+            search_model = search_model_series + str(search_model_size)
     node_parsed_dict = {}
     for node_name, node_details in node_dict.items():
         node_type = node_details[1]
